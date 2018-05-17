@@ -1,0 +1,45 @@
+body {
+    background: whitesmoke;
+  }
+  h1 {
+    color: black;
+  }
+  .message {
+    font-size: 1.5em;
+    color: rgb(69, 61, 61);
+  
+    padding: 30px;
+    text-align: center;
+    letter-spacing: 1px;
+  }
+  .ul-list {
+    font-size: 1.3em;
+    line-height: 3rem;
+  }
+  .site-footer {
+    background: rgba(91, 85, 85, 0.619);
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    clear: both;
+    color: white;
+  }
+  .site-footer li {
+    list-style: none;
+    text-transform: uppercase;
+  }
+  .site-footer li a {
+    color: white;
+  }
+  .main-container {
+    height: 80vh;
+  
+  }
+  .site-footer .container {
+    display: flex;
+  }
+  .footer-nav {
+    width: 30%;
+  }
+  

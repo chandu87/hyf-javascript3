@@ -1,4 +1,3 @@
-console.log("Hello JS");
 
 // ------------------- Step : 1 ------------------------------
 let numbers = [1, 2, 3, 4];
@@ -16,6 +15,9 @@ console.log("The doubled numbers are", newNumbers); // [2, 6]
 // -------------------Step : 2 ---------------------------------
 const ulList = document.querySelector(".ul-list");
 const message = document.querySelector(".message");
+
+showMovieData();
+
 // function for getting data with given URL
 function getAjaxData(url, successCallback, failureCallback) {
   // Create new ajax call with the js function called XMLHttpRequest
@@ -49,15 +51,23 @@ function showMovieData() {
 
 function displayData(data) {
   if (data.length > 0) {
-    message.innerHTML = "Total Number of Movies " + data.length;
-    console.log(data);
-  } else {
+    message.innerHTML = "Total Number of Movies " + data.length;    
+    data.map((element)=>{
+        const ratingInt = Math.round(element.rating);
+        if(ratingInt >= 7){
+            element.tag = "Good";
+        }else if(ratingInt >= 4 && ratingInt <=6){
+            element.tag = "Average";
+        }else if(ratingInt >= 0 && ratingInt <=3){
+            element.tag = "Bad";
+        }
+        return element;
+    });
+    
+    }else {
     message.innerHTML = "Movie data is empty";
   }
 }
 function displayError(error) {
   message.innerHTML = error;
 }
-
-
-showMovieData();

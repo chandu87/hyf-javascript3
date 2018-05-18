@@ -1,4 +1,3 @@
-
 // ------------------- Step : 1 ------------------------------
 let numbers = [1, 2, 3, 4];
 // let newNumbers = [];
@@ -49,51 +48,66 @@ function showMovieData() {
   );
 }
 
-function displayData(data) {
-  if (data.length > 0) {
-    message.innerHTML = "Total Number of Movies " + data.length;
-    let goodMovie, avgMovie, badMovie;
-    goodMovie = 0;
-    avgMovie = 0;
-    badMovie = 0; 
-    data.map((element)=>{
-        const ratingInt = Math.round(element.rating);
-        if(ratingInt >= 7){
-            element.tag = "Good";
-            goodMovie++;
-        }else if(ratingInt >= 4 && ratingInt <=6){
-            element.tag = "Average";
-            avgMovie++;
-        }else{
-            element.tag = "Bad";
-            badMovie++;
-        }
-        return element;
-    });
-    let ratingArray = [];
-    data.forEach(element => ratingArray.push(element.rating));
-    const reducer = (accumulator, currentValue) => accumulator + currentValue;
-    console.log("Average rating is : "+ Math.round(ratingArray.reduce(reducer) / ratingArray.length));  
-    console.log("Good Movies : "+goodMovie);
-    console.log("Average Movies : "+avgMovie);
-    console.log("Bad Movies : "+badMovie);
-//    console.log(data.filter(movie=>movie.tag === "Good").length);
-    let moviesIncludeKeywords = 0;
-    
-     data.forEach(movie=>{  
-      const arrayKeywords = ["The", "dog", "who", "is", "not", "a", "man"];
-      let movieSplitted = movie.title.split(" ");
-      let result = movieSplitted.some(movieWord => arrayKeywords.includes(movieWord));
-      if(result){
-        moviesIncludeKeywords++;
-      }
-    });
-    console.log(moviesIncludeKeywords);
+function displayData(moviesData) {
+  if (moviesData.length > 0) {
+    message.innerHTML = "Total Number of Movies " + moviesData.length;
 
-  }else {
+    moviesData.map(addTagForMovie);
+
+    let ratingArray = [];
+    moviesData.forEach(movie => ratingArray.push(movie.rating));
+    const reducer = (accumulator, currentValue) => accumulator + currentValue;
+    console.log(
+      "Average rating is : " +
+        Math.round(ratingArray.reduce(reducer) / ratingArray.length)
+    );
+
+    console.log(
+      "Good Movies : " + moviesData.filter(movie => movie.tag === "Good").length
+    );
+    console.log(
+      "Average Movies : " +
+        moviesData.filter(movie => movie.tag === "Average").length
+    );
+    console.log(
+      "Bad Movies : " + moviesData.filter(movie => movie.tag === "Bad").length
+    );
+
+    console.log(moviesWithKeywords(moviesData));
+
+  } else {
     message.innerHTML = "Movie data is empty";
   }
 }
+function addTagForMovie(movie) {
+  const ratingInt = Math.round(movie.rating);
+  let tagName = "";
+  if (ratingInt >= 7) {
+    tagName = "Good";
+  } else if (ratingInt >= 4 && ratingInt <= 6) {
+    tagName = "Average";
+  } else {
+    tagName = "Bad";
+  }
+  movie.tag = tagName;
+  return movie;
+}
+function moviesWithKeywords(moviesData) {
+  let moviesIncludeKeywords = 0;
+  const arrayKeywords = ["The", "dog", "who", "is", "not", "a", "man"];
+
+  moviesData.forEach(movie => {
+    const movieSplitted = movie.title.split(" ");
+    let result = movieSplitted.some(movieString =>
+      arrayKeywords.includes(movieString)
+    );
+    if (result) {
+      moviesIncludeKeywords++;
+    }
+  });
+  return moviesIncludeKeywords;
+}
+
 function displayError(error) {
   message.innerHTML = error;
 }

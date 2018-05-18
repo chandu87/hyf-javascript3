@@ -51,20 +51,46 @@ function showMovieData() {
 
 function displayData(data) {
   if (data.length > 0) {
-    message.innerHTML = "Total Number of Movies " + data.length;    
+    message.innerHTML = "Total Number of Movies " + data.length;
+    let goodMovie, avgMovie, badMovie;
+    goodMovie = 0;
+    avgMovie = 0;
+    badMovie = 0; 
     data.map((element)=>{
         const ratingInt = Math.round(element.rating);
         if(ratingInt >= 7){
             element.tag = "Good";
+            goodMovie++;
         }else if(ratingInt >= 4 && ratingInt <=6){
             element.tag = "Average";
-        }else if(ratingInt >= 0 && ratingInt <=3){
+            avgMovie++;
+        }else{
             element.tag = "Bad";
+            badMovie++;
         }
         return element;
     });
+    let ratingArray = [];
+    data.forEach(element => ratingArray.push(element.rating));
+    const reducer = (accumulator, currentValue) => accumulator + currentValue;
+    console.log("Average rating is : "+ Math.round(ratingArray.reduce(reducer) / ratingArray.length));  
+    console.log("Good Movies : "+goodMovie);
+    console.log("Average Movies : "+avgMovie);
+    console.log("Bad Movies : "+badMovie);
+//    console.log(data.filter(movie=>movie.tag === "Good").length);
+    let moviesIncludeKeywords = 0;
     
-    }else {
+     data.forEach(movie=>{  
+      const arrayKeywords = ["The", "dog", "who", "is", "not", "a", "man"];
+      let movieSplitted = movie.title.split(" ");
+      let result = movieSplitted.some(movieWord => arrayKeywords.includes(movieWord));
+      if(result){
+        moviesIncludeKeywords++;
+      }
+    });
+    console.log(moviesIncludeKeywords);
+
+  }else {
     message.innerHTML = "Movie data is empty";
   }
 }

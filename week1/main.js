@@ -12,9 +12,9 @@ let newNumbers = numbers
 console.log("The doubled numbers are", newNumbers); // [2, 6]
 
 // -------------------Step : 2 ---------------------------------
-const ulList = document.querySelector(".ul-list");
 const message = document.querySelector(".message");
 
+//Function call to Start the app (for accessdata)
 showMovieData();
 
 // function for getting data with given URL
@@ -48,25 +48,35 @@ function showMovieData() {
   );
 }
 
+//Function for handle data
 function handleData(moviesData) {
   if (moviesData.length > 0) {
     message.innerHTML = "Total Number of Movies " + moviesData.length;
+    console.log("Total Number of Movies " + moviesData.length);
 
     moviesData.map(addTagForMovie); // Adding Tag for each movie based on rating
 
     console.log("Average rating is : " + calculateAvgRating()); // Average Rating
-    console.log("Good Movies : " + totalMoviesByTag("Good"));   // Good movies
+    console.log("Good Movies : " + totalMoviesByTag("Good")); // Good movies
     console.log("Average Movies : " + totalMoviesByTag("Average")); //Average movies
     console.log("Bad Movies : " + totalMoviesByTag("Bad")); // Bad movies
-    console.log("Movies containing given keywords : " + moviesWithKeywords(moviesData));
-    console.log("Movies Released between 1980 and 1989 are : " + NumberOfMoviesWithYears(1980, 1989));
+    console.log(
+      "Movies containing given keywords : " + moviesWithKeywords(moviesData)
+    );
+    console.log(
+      "Movies Released between 1980 and 1989 are : " +
+        NumberOfMoviesWithYears(1980, 1989)
+    );
 
-
-    function NumberOfMoviesWithYears(startYear, endYear){
-      return moviesData.filter(movie => movie.year >= startYear && movie.year <= endYear).length;
+    function NumberOfMoviesWithYears(startYear, endYear) {
+      //Function for calculating Number of movies realeased between 2 years
+      return moviesData.filter(
+        movie => movie.year >= startYear && movie.year <= endYear
+      ).length;
     }
 
     function calculateAvgRating() {
+      //Function for Calculating Average rating of movies
       let ratingArray = [];
       moviesData.forEach(movie => ratingArray.push(movie.rating));
       const reducer = (accumulator, currentValue) => accumulator + currentValue;
@@ -74,20 +84,20 @@ function handleData(moviesData) {
     }
 
     function totalMoviesByTag(tagName) {
+      //Function for finding total movies by Tag name
       return moviesData.filter(movie => movie.tag === tagName).length;
     }
-  } 
-  else {
+  } else {
     message.innerHTML = "Movie data is empty";
   }
 }
 
+//Function for adding Tags for each movie based on their Rating
 function addTagForMovie(movie) {
-  const ratingInt = Math.round(movie.rating);
   let tagName = "";
-  if (ratingInt >= 7) {
+  if (movie.rating >= 7) {
     tagName = "Good";
-  } else if (ratingInt >= 4 && ratingInt <= 6) {
+  } else if (movie.rating >= 4 && movie.rating < 7) {
     tagName = "Average";
   } else {
     tagName = "Bad";
@@ -95,6 +105,7 @@ function addTagForMovie(movie) {
   movie.tag = tagName;
   return movie;
 }
+//Function for finding whether the movie title contains given keywords
 function moviesWithKeywords(moviesData) {
   let moviesIncludeKeywords = 0;
   const arrayKeywords = ["The", "dog", "who", "is", "not", "a", "man"];
@@ -111,6 +122,7 @@ function moviesWithKeywords(moviesData) {
   return moviesIncludeKeywords;
 }
 
+//Fucntion for displaying Error
 function displayError(error) {
   message.innerHTML = error;
 }

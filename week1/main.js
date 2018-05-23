@@ -54,7 +54,7 @@ function handleData(moviesData) {
     message.innerHTML = "Total Number of Movies " + moviesData.length;
     console.log("Total Number of Movies " + moviesData.length);
 
-    moviesData.map(addTagForMovie); // Adding Tag for each movie based on rating
+    moviesData.forEach(addTagForMovie); // Adding Tag for each movie based on rating
 
     console.log("Average rating is : " + calculateAvgRating()); // Average Rating
     console.log("Good Movies : " + totalMoviesByTag("Good")); // Good movies
@@ -77,10 +77,8 @@ function handleData(moviesData) {
 
     function calculateAvgRating() {
       //Function for Calculating Average rating of movies
-      let ratingArray = [];
-      moviesData.forEach(movie => ratingArray.push(movie.rating));
-      const reducer = (accumulator, currentValue) => accumulator + currentValue;
-      return Math.round(ratingArray.reduce(reducer) / ratingArray.length);
+      const reducer = (accumulator, currentValue) => accumulator + currentValue.rating;
+      return Math.round(moviesData.reduce(reducer, 0) / moviesData.length);
     }
 
     function totalMoviesByTag(tagName) {

@@ -5,16 +5,22 @@
   console.log(array30);
 
   const divisibleFactory = function(z) {
-    return arr.filter(number => number % z == 0);
+    return array1000.filter(number => number % z == 0);
   };
   const divisbleByThree = divisibleFactory(3);
   console.log("Numbers divisible by three are : ", divisbleByThree);
   console.log("Divisible by three array length is : ", divisbleByThree.length);
+  const divisbleByTen = divisibleFactory(10);
+  console.log("Numbers divisible by ten are : ", divisbleByTen);
+  console.log("Divisible by ten array length is : ", divisbleByTen.length);
+  const divisbleByTwentyOne = divisibleFactory(21);
+  console.log("Numbers divisible by twentyone are : ", divisbleByTwentyOne);
+  console.log("Divisible by twentyone array length is : ", divisbleByTwentyOne.length);
 
-  let divisibleResultArr = divisibleArr.map(
+  let divisibleResultArr = array30.map(
     number => divisibleFactory(number).length
   );
-  console.log(divisibleResultArr);
+  console.log("Divisible by array30", divisibleResultArr);
 
   function generateArray(arrayLength) {
     let arr = [];

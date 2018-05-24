@@ -1,45 +1,32 @@
 let stepOne = (function() {
-  let array1000 = generateArray(1000);
-  let array30 = generateArray(30);
-  function generateArray(arrayLength) {
+  let generateArray = function(arrayLength) {
     let arr = [];
     for (let i = 1; i <= arrayLength; i++) {
       arr.push(i);
     }
     return arr;
-  }
+  };
 
   return {
-    divisibleFactory: function(z) {
-      return array1000.filter(number => number % z == 0);
+    divisibleFactory: function(lengthOfArr, dividedBy) {
+      return generateArray(lengthOfArr).filter(
+        number => number % dividedBy == 0
+      );
     },
-    divisibleResultArr: function() {
-      return array30.map(number => this.divisibleFactory(number).length);
+    dividedNumberOfTimesArr: function(divisibleArrLength, lengthOfMainArr) {
+      return generateArray(divisibleArrLength).map(
+        number => this.divisibleFactory(lengthOfMainArr, number).length
+      );
     }
   };
 })();
-console.log(stepOne.divisibleFactory(3));
-console.log(stepOne.divisibleResultArr());
 
+console.log(
+  "Numbers divisible by 3 for the array length 1000 : ",
+  stepOne.divisibleFactory(1000, 3)
+);
 
-
-
-
-//   const divisbleByThree = divisibleFactory(3);
-//   console.log("Numbers divisible by three are : ", divisbleByThree);
-//   console.log("Divisible by three array length is : ", divisbleByThree.length);
-//   const divisbleByTen = divisibleFactory(10);
-//   console.log("Numbers divisible by ten are : ", divisbleByTen);
-//   console.log("Divisible by ten array length is : ", divisbleByTen.length);
-//   const divisbleByTwentyOne = divisibleFactory(21);
-//   console.log("Numbers divisible by twentyone are : ", divisbleByTwentyOne);
-//   console.log("Divisible by twentyone array length is : ", divisbleByTwentyOne.length);
-
-//   console.log("Divisible by array30", divisibleResultArr);
-
-// var divideCtrl = function divideController(){
-
-// }
-// function displayController(){
-
-// }
+console.log(
+  "Array divisible by numbers between 1-30 for the array length of 1000",
+  stepOne.dividedNumberOfTimesArr(30, 1000)
+);

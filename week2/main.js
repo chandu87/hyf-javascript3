@@ -1,30 +1,4 @@
-/**
- * @description Generate array of numebrs  
- * @param {number} arrayLength - The arrayLength should contain digit
- * @returns {array} [arr] - array of numbers
- */
-function generateArray(arrayLength) { 
-  let arr = [];
-  for (let i = 1; i <= arrayLength; i++) {
-    arr.push(i);
-  }
-  return arr;
-}
-
-/**
- * @description Function factory to generate functions  
- * @param {number} dividedBy - dividedBy should contain number
- * @returns {function} divisibilityChecker - divisibilityChecker function returned
- */
-function divisibleFactory(dividedBy) {
-  let divisibleNumbersArray = numbers.filter(number => number % dividedBy == 0);
-
-  function divisibilityChecker(n) {
-    return divisibleNumbersArray.includes(n);
-  }
-  return divisibilityChecker;
-}
-
+// Varibles numbers, dividers
 const numbers = generateArray(1000);
 const dividers = generateArray(30);
 
@@ -43,9 +17,46 @@ console.log(divisiblebByTenFunction(1));
 console.log(divisiblebByTenFunction(9));
 console.log(divisiblebByTenFunction(10));
 
-function dividedNumberOfTimesArr() {
-  return dividers.map(
-    divider => numbers.filter(number => number % divider == 0).length
-  );
+console.log(dividedNumberOfTimesArr(dividers));
+
+/**
+ * @description Generate array of numebrs
+ * @param {number} arrayLength - The arrayLength should contain digit
+ * @returns {array} [arr] - array of numbers
+ */
+function generateArray(arrayLength) {
+  let arr = [];
+  for (let i = 1; i <= arrayLength; i++) {
+    arr.push(i);
+  }
+  return arr;
 }
-console.log(dividedNumberOfTimesArr());
+
+/**
+ * @description Function to generate array of numbers dividedby given parameter
+ * @param {number} dividedByNumber - dividedByNumber should contain number
+ * @returns {array}  - Returns of array of numbers
+ */
+function divisibleNumbersArray(dividedByNumber) {
+  return numbers.filter(number => number % dividedByNumber == 0);
+}
+
+/**
+ * @description Function divisibleFactory to generate functions
+ * @param {number} dividedBy - dividedBy should contain number
+ * @returns {function} divisibilityChecker - divisibilityChecker function returned
+ */
+function divisibleFactory(dividedBy) {
+  function divisibilityChecker(n) {
+    return divisibleNumbersArray(dividedBy).includes(n);
+  }
+  return divisibilityChecker;
+}
+
+/**
+ * @description This Function to generate array of divided Number of Times
+ * @returns {array}  - return array contains length of divisible number of times by divider array elements
+ */
+function dividedNumberOfTimesArr(arrayOfDividers) {
+  return arrayOfDividers.map(divider => divisibleNumbersArray(divider).length);
+}

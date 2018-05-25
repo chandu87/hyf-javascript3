@@ -55,6 +55,7 @@ function divisibleFactory(dividedBy) {
 
 /**
  * @description This Function to generate array of divided Number of Times
+ * @param {array} [arrayOfDividers] - Contains Array of Dividers
  * @returns {array}  - return array contains length of divisible number of times by divider array elements
  */
 function dividedNumberOfTimesArr(arrayOfDividers) {

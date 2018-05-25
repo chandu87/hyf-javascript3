@@ -1,4 +1,9 @@
-function generateArray(arrayLength) {
+/**
+ * @description Generate array of numebrs  
+ * @param {number} arrayLength - The arrayLength should contain digit
+ * @returns {array} [arr] - array of numbers
+ */
+function generateArray(arrayLength) { 
   let arr = [];
   for (let i = 1; i <= arrayLength; i++) {
     arr.push(i);
@@ -6,12 +11,16 @@ function generateArray(arrayLength) {
   return arr;
 }
 
+/**
+ * @description Function factory to generate functions  
+ * @param {number} dividedBy - dividedBy should contain number
+ * @returns {function} divisibilityChecker - divisibilityChecker function returned
+ */
 function divisibleFactory(dividedBy) {
   let divisibleNumbersArray = numbers.filter(number => number % dividedBy == 0);
 
   function divisibilityChecker(n) {
-    return divisibleNumbersArray.includes(n)
-    ;
+    return divisibleNumbersArray.includes(n);
   }
   return divisibilityChecker;
 }

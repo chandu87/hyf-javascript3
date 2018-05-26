@@ -58,12 +58,26 @@ function handleData(moviesData) {
 
     searchButton.addEventListener("click", function() {
         ulList.innerHTML = "";
-        radioBtnAll.checked = true;
       console.log(searchKeyword.value, "button clicked");
       const searchFor = searchKeyword.value;
       searchKeyword.value = "";
+      let searchMovieTag = "";
+      if(radioBtnExcellent.checked){
+          searchMovieTag = "Excellent";
+      }else if(radioBtnVgood.checked){
+          searchMovieTag = "Very Good";
+      }else if(radioBtnGood.checked){
+          searchMovieTag = "Good";
+        }
+        console.log(searchMovieTag);
       const filteredMovies = moviesData.filter(movie => {
-        return movie.title.includes(searchFor) && movie.tag === "Excellent";
+         
+          if(searchMovieTag === ""){
+            return movie.title.includes(searchFor);
+          }else{
+            return movie.title.includes(searchFor) && movie.tag === searchMovieTag;
+          }
+
       });
       console.log(filteredMovies);
       filteredMovies.forEach(movie => {

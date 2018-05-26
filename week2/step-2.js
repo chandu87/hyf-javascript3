@@ -52,34 +52,40 @@ function showMovieData() {
 function handleData(moviesData) {
   if (moviesData.length > 0) {
     message.innerHTML = "Total Number of Movies " + moviesData.length;
-    console.log("Total Number of Movies " + moviesData.length);
     moviesData.forEach(addTagForMovie); // Adding Tag for each movie based on rating
-    console.log(moviesData);
 
+    const reducer = (accumulator, currentValue) =>
+      accumulator + currentValue.rating;
+    let searchFor, avgRating, searchMovieTag;
+    
     searchButton.addEventListener("click", function() {
-        ulList.innerHTML = "";
-      console.log(searchKeyword.value, "button clicked");
-      const searchFor = searchKeyword.value;
+      ulList.innerHTML = "";
+      searchFor = searchKeyword.value;
       searchKeyword.value = "";
-      let searchMovieTag = "";
-      if(radioBtnExcellent.checked){
-          searchMovieTag = "Excellent";
-      }else if(radioBtnVgood.checked){
-          searchMovieTag = "Very Good";
-      }else if(radioBtnGood.checked){
-          searchMovieTag = "Good";
-        }
-        console.log(searchMovieTag);
+      searchMovieTag = "";
+      if (radioBtnExcellent.checked) {
+        searchMovieTag = "Excellent";
+      } else if (radioBtnVgood.checked) {
+        searchMovieTag = "Very Good";
+      } else if (radioBtnGood.checked) {
+        searchMovieTag = "Good";
+      }
       const filteredMovies = moviesData.filter(movie => {
-         
-          if(searchMovieTag === ""){
-            return movie.title.includes(searchFor);
-          }else{
-            return movie.title.includes(searchFor) && movie.tag === searchMovieTag;
-          }
-
+        if (searchMovieTag === "") {
+          return movie.title.includes(searchFor);
+        } else {
+          return (
+            movie.title.includes(searchFor) && movie.tag === searchMovieTag
+          );
+        }
       });
-      console.log(filteredMovies);
+
+      avgRating = Math.round(  // Calculating average rating
+        filteredMovies.reduce(reducer, 0) / filteredMovies.length
+      );
+
+      message.innerHTML = "Average Rating of Filtered movies is " + avgRating;
+
       filteredMovies.forEach(movie => {
         const liItem = document.createElement("li");
         ulList.appendChild(liItem);
@@ -88,6 +94,7 @@ function handleData(moviesData) {
     });
   }
 }
+
 //Function for adding Tags for each movie based on their Rating
 function addTagForMovie(movie) {
   let tagName = "";

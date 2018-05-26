@@ -2,13 +2,14 @@ const message = document.querySelector(".message");
 const ulList = document.querySelector(".ul-list");
 const searchKeyword = document.querySelector(".search-input");
 const searchButton = document.querySelector(".search-btn");
+const radioBtnAll = document.querySelector("#radio-all");
+const radioBtnExcellent = document.querySelector("#radio-excellent");
+const radioBtnVgood = document.querySelector("#radio-vgood");
+const radioBtnGood = document.querySelector("#radio-good");
 
 //Function call to Start the app (for accessdata)
+
 showMovieData();
-searchButton.addEventListener("click", function(){
-    console.log(searchKeyword.value, "button clicked");
-    searchKeyword.value = ""; 
-})
 
 // function for getting data with given URL
 function getAjaxData(url) {
@@ -52,15 +53,25 @@ function handleData(moviesData) {
   if (moviesData.length > 0) {
     message.innerHTML = "Total Number of Movies " + moviesData.length;
     console.log("Total Number of Movies " + moviesData.length);
-
     moviesData.forEach(addTagForMovie); // Adding Tag for each movie based on rating
     console.log(moviesData);
-    moviesData.forEach((movie)=>{
+
+    searchButton.addEventListener("click", function() {
+        ulList.innerHTML = "";
+        radioBtnAll.checked = true;
+      console.log(searchKeyword.value, "button clicked");
+      const searchFor = searchKeyword.value;
+      searchKeyword.value = "";
+      const filteredMovies = moviesData.filter(movie => {
+        return movie.title.includes(searchFor) && movie.tag === "Excellent";
+      });
+      console.log(filteredMovies);
+      filteredMovies.forEach(movie => {
         const liItem = document.createElement("li");
         ulList.appendChild(liItem);
         liItem.innerHTML = movie.title;
+      });
     });
- 
   }
 }
 //Function for adding Tags for each movie based on their Rating

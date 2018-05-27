@@ -6,28 +6,47 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Week 2</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+        crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
 
 </head>
 
 <body>
-    <h1>Movie Database</h1>
-    <p class="message"></p>
-    <input class="search-input">
-    <button class="search-btn">Search</button>
-    <div>
-        <input type="radio" name="filter-movies" id="radio-all" checked>
-        <label for="radio-all">All</label>
-        <input type="radio" name="filter-movies" id="radio-excellent">
-        <label for="radio-excellent">Excellent</label>
-        <input type="radio" name="filter-movies" id="radio-vgood">
-        <label for="radio-vgood">Very Good</label>
-        <input type="radio" name="filter-movies" id="radio-good">
-        <label id="radio-good">Good</label>
-    </div>
-    <ul class="ul-list">
+    <div class="container">
+        <h1>Movie Database</h1>
+        <div class="row">
+            <input class="search-input col-sm-10 col-lg-8 input-lg" placeholder="Enter Search Text Here">
+            <button class="search-btn col-sm-10 col-lg-3 btn btn-lg btn-outline-primary">Search</button>
+        </div>
+        <div class="row radio-container">
+            <div class="col-lg-2">
+                <input type="radio" name="filter-movies" id="radio-all" checked>
+                <label for="radio-all">All</label>
+            </div>
+            <div class="col-lg-2">
+                <input type="radio" name="filter-movies" id="radio-excellent">
+                <label for="radio-excellent">Excellent</label>
+            </div>
 
-    </ul>
+            <div class="col-lg-2">
+                <input type="radio" name="filter-movies" id="radio-vgood">
+                <label for="radio-vgood">Very Good</label>
+            </div>
+            <div class="col-lg-2">
+                <input type="radio" name="filter-movies" id="radio-good">
+                <label id="radio-good">Good</label>
+            </div>
+        </div>
+        <p class="message"></p>
+
+        <ul class="ul-list">
+
+        </ul>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
     <script src="step-1.js"></script>
     <script src="step-2.js"></script>
 </body>
